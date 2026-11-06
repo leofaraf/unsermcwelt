@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Наш маленький мир</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;height:100%;overflow:hidden;background:#17231c;color:#fff;font-family:system-ui,sans-serif}canvas{display:block}button,a{touch-action:manipulation}button{font:inherit;cursor:pointer;border:1px solid #ffffff30;border-radius:12px;background:#16281de0;color:#fff;padding:12px 18px}button:hover{background:#324d39}button:disabled{opacity:.5;cursor:wait}header{position:fixed;top:24px;left:28px;right:28px;display:flex;justify-content:space-between;align-items:flex-start;pointer-events:none;text-shadow:0 2px 8px #000}header>*{pointer-events:auto}.brand{font-size:18px;font-weight:650}.eyebrow{display:block;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#c5dcc9;margin-bottom:7px}.actions{display:flex;gap:8px}.overlay{position:fixed;inset:0;display:grid;place-items:center;background:linear-gradient(0deg,#102018c9,#10201820);padding:24px}.card{width:min(510px,100%);padding:36px;background:#10251de8;border:1px solid #d2ead52b;border-radius:22px;box-shadow:0 20px 90px #0005;backdrop-filter:blur(16px)}h1{font-family:Georgia,serif;font-size:clamp(38px,6vw,62px);font-weight:400;line-height:1.05;letter-spacing:-2px;margin:14px 0 20px}.card p{color:#c4d3c7;line-height:1.7;font-size:14px}.primary{background:#d6ed9b;color:#17231c;border:0;font-weight:700;margin-top:10px;width:100%;padding:16px}.primary:hover{background:#e8ffb3}.keys{display:flex;gap:7px;flex-wrap:wrap;font-size:11px;color:#c8d8ca;margin-top:20px}.keys span{border:1px solid #fff2;padding:7px;border-radius:6px}#cross{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);font:24px monospace;text-shadow:0 1px 3px #000;pointer-events:none;display:none}footer{position:fixed;bottom:20px;left:28px;right:28px;display:flex;justify-content:space-between;gap:15px;font:11px monospace;color:#e5efdc;pointer-events:none;text-shadow:0 1px 4px #000}#music{position:fixed;right:24px;top:90px;width:min(360px,calc(100vw - 48px));background:#13271ff5;border:1px solid #fff3;border-radius:16px;padding:18px;z-index:4;box-shadow:0 15px 60px #0005}#music p{font-size:12px;color:#bccfbf;line-height:1.6}#music a{color:#d6ed9b}#music iframe{width:100%;height:120px;border:0;border-radius:8px}.row{display:flex;justify-content:space-between;align-items:center;gap:12px}.row button{padding:5px 10px}#error{color:#ffcab8;white-space:pre-wrap;font-size:13px}.hidden{display:none!important}#touch{display:none;position:fixed;bottom:60px;left:20px;z-index:2;grid-template-columns:repeat(3,48px);gap:5px}#touch button{padding:13px;user-select:none}#jump{position:fixed;right:22px;bottom:70px;display:none;z-index:2}body.playing #cross{display:block}body.playing header{opacity:.65}@media(pointer:coarse){body.playing #touch{display:grid}body.playing #jump{display:block}}@media(max-width:600px){header{top:15px;left:16px;right:16px}.brand{font-size:14px}.actions button{font-size:12px;padding:10px}.card{padding:26px}footer{left:16px;right:16px;font-size:9px}.area{display:none}}
+header{z-index:3}.overlay{z-index:2;overflow:auto}.download{display:block;margin-top:16px;padding:12px 18px;border:1px solid #d6ed9b66;border-radius:12px;color:#d6ed9b;text-align:center;text-decoration:none;font-size:14px}.download:hover{background:#324d39}
+</style></head><body>
+<header><div class="brand"><span class="eyebrow">Леон & Оля · Minecraft</span>Наш маленький мир</div><div class="actions"><button id="home" title="Вернуться к началу">⌂ Старт</button><button id="musicButton" aria-label="Выключить музыку" aria-pressed="true">♫ Звук вкл.</button><button id="menuButton">Меню</button></div></header>
+<div id="cross">+</div>
+<section class="overlay" id="overlay"><div class="card"><span class="eyebrow">Прогулка по нашему миру</span><h1>Побудем<br>здесь.</h1><p id="status">Загружаем блоки и текстуры…</p><div id="error"></div><button class="primary" id="enter" disabled>Загрузка…</button><div class="keys"><span>WASD · движение</span><span>Мышь · обзор</span><span>Пробел · прыжок</span><span>Shift · бег</span><span>Esc · меню</span><span>R · старт</span></div><p style="font-size:11px;margin-bottom:0">Снимок мира, не подключение к серверу. Блоки нельзя ломать. Музыка: C418 — Haggstrom · Minecraft Volume Alpha.</p></div></section>
+<audio id="backgroundMusic" src="./haggstrom.ogg" loop preload="none"></audio>
+<div id="touch"><span></span><button data-key="KeyW">↑</button><span></span><button data-key="KeyA">←</button><button data-key="KeyS">↓</button><button data-key="KeyD">→</button></div><button id="jump" data-key="Space">Прыжок</button>
+<footer><span id="coords">26.32 / 67.52 / 203.11</span><span class="area">59 × 70 блоков · Y 52–80 · коллизии включены</span></footer>
+<script type="importmap">{"imports":{"three":"./three.module.js"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import {addSnapshotMobs} from './mobs.js';
+import {serverDownloadUrl} from './config.js';
+const $=id=>document.getElementById(id);
+const download=document.createElement('a');download.className='download';download.href=serverDownloadUrl || '#';download.download='minecraft-server-1.21.8-2026-11-06.zip';download.textContent='↓ Скачать сборку сервера · 246 МБ';document.querySelector('.card').append(download);if(!serverDownloadUrl){download.textContent='Сборка сервера — ссылка появится на GitHub Pages';download.setAttribute('aria-disabled','true');download.onclick=e=>e.preventDefault();}
+const backupNote=document.createElement('p');backupNote.style.cssText='font-size:11px;margin-bottom:0';backupNote.textContent='Полный мир, все измерения, игроки и настройки. Копия от 06.11.2026, 06:40 МСК. Инструкция переноса внутри архива.';download.after(backupNote);
+const start=new THREE.Vector3(26.32,67.52,203.11),pos=start.clone();
+let animalColliders=[];
+let map,world,ready=false,playing=false,yaw=0,pitch=0,vy=0,ground=false;
+const keys=new Set(),radius=.28,height=1.75,eye=1.62,EPS=.0001;
+const scene=new THREE.Scene();scene.background=new THREE.Color('#b9d9e4');scene.fog=new THREE.Fog('#b9d9e4',45,135);
+const camera=new THREE.PerspectiveCamera(72,innerWidth/innerHeight,.04,250);camera.rotation.order='YXZ';
+const renderer=new THREE.WebGLRenderer({antialias:true,powerPreference:'high-performance'});renderer.setSize(innerWidth,innerHeight);renderer.setPixelRatio(Math.min(devicePixelRatio,1.7));renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.setClearColor('#b9d9e4');document.body.prepend(renderer.domElement);
+scene.add(new THREE.HemisphereLight('#e8f5ff','#71624a',2.3));const sun=new THREE.DirectionalLight('#fff4d7',2.2);sun.position.set(-20,100,30);scene.add(sun);
+const textureLoader=new THREE.TextureLoader(),textures=new Map(),materials=new Map();
+const AIR=new Set(['air','cave_air','void_air']);
+function vegetation(n){return /sapling|flower|tall_grass|short_grass|fern|seagrass|poppy|dandelion|azure_bluet|cornflower|lilac|peony|rose_bush|mushroom|wheat|pumpkin_stem|pink_petals|leaf_litter/.test(n)&&!n.includes('leaves')&&!n.startsWith('potted_')&&n!=='flowering_azalea';}
+function shapes(state){
+ const n=state.Name.split(':')[1],p=state.Properties||{};
+ if(AIR.has(n))return [];
+ if(n==='water')return [[0,0,0,1,p.level==='0'? .9:.8,1]];
+ if(vegetation(n)||n==='vine'||n==='glow_lichen'||n==='tripwire')return [];
+ if(n==='bamboo')return [[.41,0,.41,.59,1,.59]];
+ if(n.endsWith('_bed'))return [[0,.1875,0,1,.5625,1]];
+ if(n.endsWith('_slab'))return p.type==='double'?[[0,0,0,1,1,1]]:p.type==='top'?[[0,.5,0,1,1,1]]:[[0,0,0,1,.5,1]];
+ if(n.endsWith('_stairs')){let top=p.half==='top';let a=[0,top?.5:0,0,1,top?1:.5,1],b={north:[0,top?0:.5,0,1,top?.5:1,.5],south:[0,top?0:.5,.5,1,top?.5:1,1],west:[0,top?0:.5,0,.5,top?.5:1,1],east:[.5,top?0:.5,0,1,top?.5:1,1]}[p.facing]||[0,.5,0,1,1,.5];return[a,b];}
+ if(n.endsWith('_trapdoor')){if(p.open==='true')return p.facing==='north'||p.facing==='south'?[[0,0,.42,1,1,.58]]:[[.42,0,0,.58,1,1]];return p.half==='top'?[[0,.8125,0,1,1,1]]:[[0,0,0,1,.1875,1]];}
+ if(n.endsWith('_door')){let side=p.facing==='east'||p.facing==='west';if(p.open==='true')side=!side;return side?[[.42,0,0,.58,1,1]]:[[0,0,.42,1,1,.58]];}
+ if(n.includes('fence_gate')){if(p.open==='true')return [[0,0,.4,.15,1.5,.6],[.85,0,.4,1,1.5,.6]];return p.facing==='east'||p.facing==='west'?[[.4,0,0,.6,1.5,1]]:[[0,0,.4,1,1.5,.6]];}
+ if(n.endsWith('_fence')||n.endsWith('_wall')){let s=[[.375,0,.375,.625,1.5,.625]];if(p.north&&p.north!=='false'&&p.north!=='none')s.push([.4,.35,0,.6,1.35,.5]);if(p.south&&p.south!=='false'&&p.south!=='none')s.push([.4,.35,.5,.6,1.35,1]);if(p.west&&p.west!=='false'&&p.west!=='none')s.push([0,.35,.4,.5,1.35,.6]);if(p.east&&p.east!=='false'&&p.east!=='none')s.push([.5,.35,.4,1,1.35,.6]);return s;}
+ if(n.includes('torch'))return [[.43,0,.43,.57,.7,.57]];
+ if(n.includes('pressure_plate')||n==='rail'||n==='redstone_wire'||n==='moss_carpet')return [[0,0,0,1,.0625,1]];
+ if(n.startsWith('potted_'))return [[.3,0,.3,.7,.55,.7]];
+ if(n==='chest')return [[.0625,0,.0625,.9375,.875,.9375]];
+ if(n==='anvil')return [[.125,0,.125,.875,1,.875]];
+ if(n==='ladder'||n==='white_wall_banner')return [[0,0,.45,1,1,.55]];
+ if(n==='nether_portal')return [[0,0,.45,1,1,.55]];
+ if(n==='campfire')return [[0,0,0,1,.4375,1]];
+ return [[0,0,0,1,1,1]];
+}
+function solid(n){return !AIR.has(n)&&n!=='water'&&!vegetation(n)&&!['vine','glow_lichen','tripwire','ladder','nether_portal','redstone_wire','rail','torch','wall_torch'].includes(n);}
+function stateAt(x,y,z){x-=map.bounds.min[0];y-=map.bounds.min[1];z-=map.bounds.min[2];const[sx,sy,sz]=map.size;if(x<0||x>=sx||y<0||y>=sy||z<0||z>=sz)return null;return world[map.blocks[x+sx*(z+sz*y)]];}
+function material(name,face){const key=name+':'+face;if(materials.has(key))return materials.get(key);let textureName=textureIndex[name][face],tex=textures.get(textureName);if(!tex){tex=textureLoader.load('./'+textureName+'.png');tex.magFilter=THREE.NearestFilter;tex.minFilter=THREE.NearestFilter;tex.generateMipmaps=false;tex.colorSpace=THREE.SRGBColorSpace;textures.set(textureName,tex);}const n=name.split(':')[1],water=n==='water',glass=n==='glass',portal=n==='nether_portal';let color=0xffffff;if(n==='grass_block'&&face==='top'||n.includes('leaves')&&!n.includes('cherry')||n==='short_grass'||n==='tall_grass'||n==='fern')color=0x8acb61;if(water)color=0x5bade2;const m=new THREE.MeshLambertMaterial({map:tex,color,transparent:water||glass||portal,opacity:water?.65:glass?.32:portal?.65:1,alphaTest:water||glass||portal?0:.35,side:THREE.DoubleSide,depthWrite:!water&&!glass&&!portal});materials.set(key,m);return m;}
+let textureIndex;
+function build(){
+ world=map.palette.map(s=>({state:s,name:s.Name.split(':')[1],boxes:shapes(s),solid:solid(s.Name.split(':')[1])}));
+ const batches=new Map(),matrix=new THREE.Matrix4(),p=new THREE.Vector3(),q=new THREE.Quaternion(),scale=new THREE.Vector3();
+ const [sx,sy,sz]=map.size,[ox,oy,oz]=map.bounds.min;
+ for(let y=0;y<sy;y++)for(let z=0;z<sz;z++)for(let x=0;x<sx;x++){
+  const s=world[map.blocks[x+sx*(z+sz*y)]],name=s.state.Name;if(AIR.has(s.name))continue;
+  const wx=x+ox,wy=y+oy,wz=z+oz;
+  if(s.boxes.length===1&&s.boxes[0].join(',')==='0,0,0,1,1,1'&&s.solid&&!s.name.includes('leaves')&&s.name!=='glass'){
+   if([[1,0,0],[-1,0,0],[0,1,0],[0,-1,0],[0,0,1],[0,0,-1]].every(([a,b,c])=>{let n=stateAt(wx+a,wy+b,wz+c);return n&&n.solid&&n.boxes.length===1&&n.boxes[0].join(',')==='0,0,0,1,1,1'&&!n.name.includes('leaves')&&n.name!=='glass';}))continue;
+  }
+  if(!batches.has(name))batches.set(name,{cubes:[],planes:[]});const batch=batches.get(name);
+  for(const b of s.boxes)batch.cubes.push([wx+(b[0]+b[3])/2,wy+(b[1]+b[4])/2,wz+(b[2]+b[5])/2,b[3]-b[0],b[4]-b[1],b[5]-b[2]]);
+  if(!s.boxes.length){batch.planes.push([wx+.5,wy+.5,wz+.5]);}
+ }
+ const box=new THREE.BoxGeometry(1,1,1),plane=new THREE.PlaneGeometry(1,1);
+ for(const[name,batch]of batches){
+  if(batch.cubes.length){const side=material(name,'side'),mesh=new THREE.InstancedMesh(box,[side,side,material(name,'top'),material(name,'bottom'),side,side],batch.cubes.length);batch.cubes.forEach((b,i)=>{p.set(...b.slice(0,3));scale.set(...b.slice(3));matrix.compose(p,q,scale);mesh.setMatrixAt(i,matrix);});mesh.instanceMatrix.needsUpdate=true;mesh.computeBoundingSphere();scene.add(mesh);}
+  if(batch.planes.length){const mesh=new THREE.InstancedMesh(plane,material(name,'side'),batch.planes.length*2);batch.planes.forEach((b,i)=>{for(let j=0;j<2;j++){p.set(...b);scale.set(1,1,1);const rot=new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0,1,0),Math.PI/4+j*Math.PI/2);matrix.compose(p,rot,scale);mesh.setMatrixAt(i*2+j,matrix);}});mesh.computeBoundingSphere();scene.add(mesh);}
+ }
+}
+function intersect(a,b){return a[0]<b[3]-EPS&&a[3]>b[0]+EPS&&a[1]<b[4]-EPS&&a[4]>b[1]+EPS&&a[2]<b[5]-EPS&&a[5]>b[2]+EPS;}
+function playerBox(p){return[p.x-radius,p.y,p.z-radius,p.x+radius,p.y+height,p.z+radius];}
+function obstacles(p){const box=playerBox(p),list=[];for(let y=Math.floor(box[1])-1;y<=Math.floor(box[4]);y++)for(let z=Math.floor(box[2]);z<=Math.floor(box[5]);z++)for(let x=Math.floor(box[0]);x<=Math.floor(box[3]);x++){let s=stateAt(x,y,z);if(!s?.solid)continue;for(const b of s.boxes){const bounds=[x+b[0],y+b[1],z+b[2],x+b[3],y+b[4],z+b[5]];if(intersect(box,bounds))list.push(bounds);}}for(const bounds of animalColliders)if(intersect(box,bounds))list.push(bounds);return list;}
+function moveAxis(axis,amount){if(!amount)return false;const steps=Math.ceil(Math.abs(amount)/.08),delta=amount/steps;let hit=false;for(let k=0;k<steps;k++){pos[axis]+=delta;const hits=obstacles(pos);if(hits.length){hit=true;for(const b of hits){if(axis==='x')pos.x=delta>0?Math.min(pos.x,b[0]-radius-EPS):Math.max(pos.x,b[3]+radius+EPS);if(axis==='z')pos.z=delta>0?Math.min(pos.z,b[2]-radius-EPS):Math.max(pos.z,b[5]+radius+EPS);if(axis==='y')pos.y=delta>0?Math.min(pos.y,b[1]-height-EPS):Math.max(pos.y,b[4]+EPS);}break;}}const lo=map.bounds.min,hi=map.bounds.maxInclusive;pos.x=THREE.MathUtils.clamp(pos.x,lo[0]+radius,hi[0]+1-radius);pos.z=THREE.MathUtils.clamp(pos.z,lo[2]+radius,hi[2]+1-radius);if(pos.y<lo[1]){pos.y=lo[1];if(axis==='y')hit=true;}if(pos.y>hi[1]+1-height){pos.y=hi[1]+1-height;if(axis==='y')hit=true;}return hit;}
+function horizontal(axis,d){const old=pos.clone(),hit=moveAxis(axis,d);if(hit&&ground){const blocked=pos.clone();pos.copy(old);pos.y+=.6;if(!obstacles(pos).length&&!moveAxis(axis,d)){moveAxis('y',-.6);}else pos.copy(blocked);}}
+function physics(dt){let water=stateAt(Math.floor(pos.x),Math.floor(pos.y+.7),Math.floor(pos.z))?.name==='water';let forward=(keys.has('KeyW')||keys.has('ArrowUp')?1:0)-(keys.has('KeyS')||keys.has('ArrowDown')?1:0),right=(keys.has('KeyD')||keys.has('ArrowRight')?1:0)-(keys.has('KeyA')||keys.has('ArrowLeft')?1:0),norm=Math.hypot(forward,right)||1,speed=water?2.6:keys.has('ShiftLeft')?6:4.3;horizontal('x',(-Math.sin(yaw)*forward+Math.cos(yaw)*right)/norm*speed*dt);horizontal('z',(-Math.cos(yaw)*forward-Math.sin(yaw)*right)/norm*speed*dt);if(water){vy-=4*dt;vy*=Math.exp(-3*dt);if(keys.has('Space'))vy=3;if(keys.has('ControlLeft'))vy=-3;}else{if(ground&&keys.has('Space')){vy=8;ground=false;}vy-=24*dt;}let hit=moveAxis('y',vy*dt);ground=hit&&vy<0;if(hit)vy=0;}
+function reset(){pos.copy(start);vy=0;ground=false;yaw=0;pitch=-.08;for(let i=0;i<30&&obstacles(pos).length;i++)pos.y+=.05;updateCamera();}
+function updateCamera(){camera.position.set(pos.x,pos.y+eye,pos.z);camera.rotation.set(pitch,yaw,0,'YXZ');$('coords').textContent=`X ${pos.x.toFixed(2)}   Y ${pos.y.toFixed(2)}   Z ${pos.z.toFixed(2)}`;}
+function pause(){playing=false;keys.clear();document.body.classList.remove('playing');$('overlay').classList.remove('hidden');$('enter').textContent='Продолжить прогулку →';if(document.pointerLockElement)document.exitPointerLock();}
+function begin(){if(!ready)return;startMusic();playing=true;document.body.classList.add('playing');$('overlay').classList.add('hidden');if(!matchMedia('(pointer:coarse)').matches){try{const p=renderer.domElement.requestPointerLock();p?.catch(()=>{$('status').textContent='Зажми левую кнопку мыши для обзора, если захват курсора недоступен.';});}catch{}}}
+$('enter').onclick=begin;$('menuButton').onclick=pause;$('home').onclick=()=>{if(ready)reset();};
+document.addEventListener('pointerlockchange',()=>{if(!document.pointerLockElement&&playing&&!matchMedia('(pointer:coarse)').matches)pause();});
+let dragging=false;renderer.domElement.addEventListener('pointerdown',e=>{dragging=true;renderer.domElement.setPointerCapture(e.pointerId);});renderer.domElement.addEventListener('pointerup',()=>dragging=false);
+document.addEventListener('mousemove',e=>{if(playing&&(document.pointerLockElement||dragging)){yaw-=e.movementX*.0022;pitch=THREE.MathUtils.clamp(pitch-e.movementY*.0022,-1.5,1.5);}});
+let touch=null;renderer.domElement.addEventListener('touchstart',e=>{touch=e.touches[0];},{passive:true});renderer.domElement.addEventListener('touchmove',e=>{if(!playing||!touch)return;let t=e.touches[0];yaw-=(t.clientX-touch.clientX)*.004;pitch=THREE.MathUtils.clamp(pitch-(t.clientY-touch.clientY)*.004,-1.5,1.5);touch=t;e.preventDefault();},{passive:false});
+document.addEventListener('keydown',e=>{if(e.code==='Escape'){pause();return;}if(e.code==='KeyR'&&ready){reset();return;}if(e.code==='KeyM'){toggleMusic();return;}if(playing){keys.add(e.code);if(['Space','ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(e.code))e.preventDefault();}});document.addEventListener('keyup',e=>keys.delete(e.code));window.addEventListener('blur',()=>{keys.clear();if(playing)pause();});
+document.querySelectorAll('[data-key]').forEach(b=>{b.onpointerdown=e=>{keys.add(b.dataset.key);b.setPointerCapture(e.pointerId);e.preventDefault();};b.onpointerup=b.onpointercancel=()=>keys.delete(b.dataset.key);});
+const audio=$('backgroundMusic');audio.volume=.3;
+let musicEnabled=true;
+function musicLabel(){const button=$('musicButton');button.textContent=musicEnabled?'♫ Звук вкл.':'♫ Звук выкл.';button.setAttribute('aria-pressed',String(musicEnabled));button.setAttribute('aria-label',musicEnabled?'Выключить музыку':'Включить музыку');}
+function startMusic(){if(musicEnabled)audio.play().catch(()=>{musicEnabled=false;musicLabel();});}
+function toggleMusic(){musicEnabled=!musicEnabled;if(musicEnabled)startMusic();else audio.pause();musicLabel();}
+$('musicButton').onclick=toggleMusic;
+audio.addEventListener('error',()=>{musicEnabled=false;musicLabel();$('musicButton').title='Не удалось загрузить haggstrom.ogg';});
+addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);});
+let previous=performance.now(),accumulator=0;function frame(now){requestAnimationFrame(frame);let dt=Math.min((now-previous)/1000,.1);previous=now;if(ready){if(playing){accumulator+=dt;while(accumulator>=1/120){physics(1/120);accumulator-=1/120;}}else accumulator=0;updateCamera();}renderer.render(scene,camera);}requestAnimationFrame(frame);
+try{const responses=await Promise.all([fetch('./blocks.json'),fetch('./textures.json')]);if(responses.some(r=>!r.ok))throw Error('Не удалось загрузить карту. Запусти локальный HTTP-сервер по инструкции.');[map,textureIndex]=await Promise.all(responses.map(r=>r.json()));build();let mobText='';try{const mobs=await addSnapshotMobs(scene);animalColliders=mobs.colliders;mobText='28 панд и 2 лошади на сохранённых местах. ';}catch(e){$('error').textContent=e.message;}ready=true;reset();$('status').textContent=mobText+'Начало: 26.32, 67.52, 203.11. Ходи, прыгай и осматривайся. Животные — неподвижный снимок мира.';$('enter').disabled=false;$('enter').textContent='Войти в мир →';}catch(e){$('status').textContent='Не удалось открыть мир';$('error').textContent=e.message+'\nНе открывай HTML двойным кликом: нужен запуск через localhost.';console.error(e);}
+</script></body></html>

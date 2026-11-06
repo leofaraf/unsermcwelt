@@ -1,0 +1,864 @@
+{
+  "snapshotUtc": "2026-11-06T03:40:55Z",
+  "dimension": "minecraft:overworld",
+  "bounds": {
+    "min": [
+      -10,
+      52,
+      171
+    ],
+    "maxInclusive": [
+      48,
+      80,
+      240
+    ]
+  },
+  "entities": [
+    {
+      "type": "panda",
+      "position": [
+        -3.8832700861209415,
+        62.71076431274414,
+        199.77066719076953
+      ],
+      "rotation": [
+        285.8002014160156,
+        0.0
+      ],
+      "uuid": [
+        -1398745464,
+        1722238569,
+        -1550993959,
+        784578434
+      ],
+      "name": null,
+      "age": 0,
+      "variant": 0,
+      "mainGene": "brown",
+      "hiddenGene": "aggressive",
+      "sitting": false,
+      "tame": false,
+      "equipment": {},
+      "vehicle": {
+        "type": "minecraft:oak_boat",
+        "position": [
+          -3.8832700861209415,
+          62.52326431274414,
+          199.77066719076953
+        ],
+        "rotation": [
+          -77.04254150390625,
+          0.0
+        ]
+      }
+    },
+    {
+      "type": "panda",
+      "position": [
+        -3.8217618654474417,
+        62.710764312744146,
+        198.07590021869166
+      ],
+      "rotation": [
+        335.7376708984375,
+        0.0
+      ],
+      "uuid": [
+        -573392253,
+        1121731973,
+        -1201050298,
+        -1423149023
+      ],
+      "name": null,
+      "age": 0,
+      "variant": 0,
+      "mainGene": "aggressive",
+      "hiddenGene": "normal",
+      "sitting": false,
+      "tame": false,
+      "equipment": {},
+      "vehicle": {
+        "type": "minecraft:jungle_boat",
+        "position": [
+          -3.8217618654474417,
+          62.523264312744146,
+          198.07590021869166
+        ],
+        "rotation": [
+          -91.72704315185547,
+          0.0
+        ]
+      }
+    },
+    {
+      "type": "panda",
+      "position": [
+        15.044872958011961,
+        63.0,
+        190.27486190866816
+      ],
+      "rotation": [
+        63.64500427246094,
+        0.0
+      ],
+      "uuid": [
+        8982812,
+        588138340,
+        -1983085046,
+        -1038112502
+      ],
+      "name": null,
+      "age": 0,
+      "variant": 0,
+      "mainGene": "weak",
+      "hiddenGene": "weak",
+      "sitting": false,
+      "tame": false,
+      "equipment": {},
+      "vehicle": null
+    },
+    {
+      "type": "panda",
+      "position": [
+        18.350000023841858,
+        63.0,
+        190.16477186972236
+      ],
+      "rotation": [
+        96.79046630859375,
+        0.0
+      ],
+      "uuid": [
+        -1957421239,
+        -1581432200,
+        -1444659062,
+        -429745014
+      ],
+      "name": null,
+      "age": 0,
+      "variant": 0,
+      "mainGene": "brown",
+      "hiddenGene": "weak",
+      "sitting": false,
+      "tame": false,
+      "equipment": {},
+      "vehicle": null
+    },
+    {
+      "type": "panda",
+      "position": [
+        22.697127654002685,
+        63.0,
+        187.8403225418399
+      ],
+      "rotation": [
+        143.27896118164062,
+        0.0
+      ],
+      "uuid": [
+        -645290146,
+        1733838012,
+        -1576570770,
+        -855620457
+      ],
+      "name": "фёкла",
+      "age": 0,
+      "variant": 0,
+      "mainGene": "weak",
+      "hiddenGene": "weak",
+      "sitting": false,
+      "tame": false,
+      "equipment": {},
+      "vehicle": null
+    },
+    {
+      "type": "panda",
+      "position": [
+        22.649999976158142,
+        63.0,
+        189.52255795679284
+      ],
+      "rotation": [
+        52.25370788574219,
+        0.0
+      ],
+      "uuid": [
+        1206184933,
+        628179897,
+        -1894808535,
+        182994025
+      ],
+      "name": "Марло",
+      "age": 0,
+      "variant": 0,
+      "mainGene": "brown",
+      "hiddenGene": "weak",
+      "sitting": false,
+      "tame": false,
+      "equipment": {},
+      "vehicle": null
+    },
+    {
+      "type": "panda",
+      "position": [
+        23.67291669547558,
+        63.0,
+        190.8062500357628
+      ],
+      "rotation": [
+        90.78497314453125,
+        0.0
+      ],
+      "uuid": [
+        -1355930830,
+        950881042,
+        -1644849345,
+        -851035165
+      ],
+      "name": null,
+      "age": 0,
+      "variant": 0,
+      "mainGene": "weak",
+      "hiddenGene": "normal",
+      "sitting": false,
+      "tame": false,
+      "equipment": {},
+      "vehicle": null
+    },
+    {
+      "type": "panda",
+      "position": [
+        24.09063125525049,
+        63.0,
+        185.8062500357628
+      ],
+      "rotation": [
+        320.9878234863281,
+        0.0
+      ],
+      "uuid": [
+        -1357452044,
+        714165413,
+        -1383287272,
+        1435486531
+      ],
+      "name": null,
+      "age": 0,
+      "variant": 0,
+      "mainGene": "weak",
+      "hiddenGene": "brown",
+      "sitting": false,
+      "tame": false,
+      "equipment": {},
+      "vehicle": null
+    },
+    {
+      "type": "panda",
+      "position": [
+        25.350000023841858,
+        63.0,
+        184.46784442954572
+      ],
+      "rotation": [
+        99.3236083984375,
+        0.0
+      ],
+      "uuid": [
+        -2079033853,
+        -2047129562,
+        -1169709302,
+        -138248352
+      ],
+      "name": null,
+      "age": 0,
+      "variant": 0,
+      "mainGene": "weak",
+      "hiddenGene": "weak",
+      "sitting": false,
+      "tame": false,
+      "equipment": {},
+      "vehicle": null
+    },
+    {
+      "type": "panda",
+      "position": [
+        28.70625002682209,
+        64.0,
+        184.8395833671093
+      ],
+      "rotation": [
+        221.30038452148438,
+        0.0
+      ],
+      "uuid": [
+        -1604367713,
+        266947761,
+        -1305020925,
+        1059060561
+      ],
+      "name": null,
+      "age": 0,
+      "variant": 0,
+      "mainGene": "weak",
+      "hiddenGene": "weak",
+      "sitting": false,
+      "tame": false,
+      "equipment": {},
+      "vehicle": null
+    },
+    {
+      "type": "panda",
+      "position": [
+        21.032655445631487,
+        64.0,
+        189.65868534866183
+      ],
+      "rotation": [
+        324.27349853515625,
+        0.0
+      ],
+      "uuid": [
+        -1049962331,
+        1373194217,
+        -1124486479,
+        -1652136386
+      ],
+      "name": null,
+      "age": 0,
+      "variant": 0,
+      "mainGene": "normal",
+      "hiddenGene": "weak",
+      "sitting": false,
+      "tame": false,
+      "equipment": {},
+      "vehicle": null
+    },
+    {
+      "type": "panda",
+      "position": [
+        18.393749982118607,
+        63.0,
+        192.16041664779186
+      ],
+      "rotation": [
+        177.71279907226562,
+        0.0
+      ],
+      "uuid": [
+        -2110065915,
+        -59749073,
+        -1697826983,
+        695420447
+      ],
+      "name": null,
+      "age": 0,
+      "variant": 0,
+      "mainGene": "weak",
+      "hiddenGene": "weak",
+      "sitting": false,
+      "tame": false,
+      "equipment": {},
+      "vehicle": null
+    },
+    {
+      "type": "panda",
+      "position": [
+        24.725000023841858,
+        63.0,
+        194.35000002384186
+      ],
+      "rotation": [
+        359.9934387207031,
+        0.0
+      ],
+      "uuid": [
+        -324258793,
+        -899397473,
+        -1771508922,
+        2071382468
+      ],
+      "name": null,
+      "age": 0,
+      "variant": 0,
+      "mainGene": "weak",
+      "hiddenGene": "weak",
+      "sitting": false,
+      "tame": false,
+      "equipment": {},
+      "vehicle": null
+    },
+    {
+      "type": "panda",
+      "position": [
+        21.00000100441456,
+        63.0,
+        194.56480900995896
+      ],
+      "rotation": [
+        3.814697265625e-05,
+        0.0
+      ],
+      "uuid": [
+        -199920530,
+        1818247435,
+        -1464333678,
+        -1952446462
+      ],
+      "name": null,
+      "age": 0,
+      "variant": 0,
+      "mainGene": "weak",
+      "hiddenGene": "weak",
+      "sitting": false,
+      "tame": false,
+      "equipment": {},
+      "vehicle": null
+    },
+    {
+      "type": "panda",
+      "position": [
+        16.906250029802322,
+        63.0,
+        192.72500002384186
+      ],
+      "rotation": [
+        130.9027862548828,
+        0.0
+      ],
+      "uuid": [
+        -1095787652,
+        -1828370990,
+        -1168055900,
+        100743133
+      ],
+      "name": null,
+      "age": 0,
+      "variant": 0,
+      "mainGene": "weak",
+      "hiddenGene": "weak",
+      "sitting": false,
+      "tame": false,
+      "equipment": {},
+      "vehicle": null
+    },
+    {
+      "type": "panda",
+      "position": [
+        21.727198786382132,
+        63.0,
+        192.72500002384186
+      ],
+      "rotation": [
+        229.225341796875,
+        0.0
+      ],
+      "uuid": [
+        1658952636,
+        722356305,
+        -1969625306,
+        1263014346
+      ],
+      "name": null,
+      "age": 0,
+      "variant": 0,
+      "mainGene": "weak",
+      "hiddenGene": "weak",
+      "sitting": false,
+      "tame": false,
+      "equipment": {},
+      "vehicle": null
+    },
+    {
+      "type": "panda",
+      "position": [
+        23.274999976158142,
+        63.0,
+        193.72500002384186
+      ],
+      "rotation": [
+        222.671142578125,
+        0.0
+      ],
+      "uuid": [
+        -306082934,
+        1676429806,
+        -1408439609,
+        931087639
+      ],
+      "name": null,
+      "age": 0,
+      "variant": 0,
+      "mainGene": "weak",
+      "hiddenGene": "brown",
+      "sitting": false,
+      "tame": false,
+      "equipment": {},
+      "vehicle": null
+    },
+    {
+      "type": "panda",
+      "position": [
+        30.990885845357816,
+        65.0,
+        192.64999997615814
+      ],
+      "rotation": [
+        180.803466796875,
+        0.0
+      ],
+      "uuid": [
+        -4915140,
+        -536458014,
+        -1830830271,
+        -761446013
+      ],
+      "name": null,
+      "age": 0,
+      "variant": 0,
+      "mainGene": "weak",
+      "hiddenGene": "weak",
+      "sitting": false,
+      "tame": false,
+      "equipment": {},
+      "vehicle": null
+    },
+    {
+      "type": "panda",
+      "position": [
+        31.725000023841858,
+        65.0,
+        194.72500002384186
+      ],
+      "rotation": [
+        176.4224853515625,
+        0.0
+      ],
+      "uuid": [
+        -1018383908,
+        -958512652,
+        -2132191822,
+        815670874
+      ],
+      "name": null,
+      "age": 0,
+      "variant": 0,
+      "mainGene": "normal",
+      "hiddenGene": "weak",
+      "sitting": false,
+      "tame": false,
+      "equipment": {},
+      "vehicle": null
+    },
+    {
+      "type": "horse",
+      "position": [
+        23.125782773255185,
+        64.0,
+        222.97131390888987
+      ],
+      "rotation": [
+        89.20144653320312,
+        0.0
+      ],
+      "uuid": [
+        -388209719,
+        -452116315,
+        -1977981843,
+        539364707
+      ],
+      "name": null,
+      "age": 0,
+      "variant": 1,
+      "mainGene": "normal",
+      "hiddenGene": "normal",
+      "sitting": false,
+      "tame": true,
+      "equipment": {
+        "saddle": {
+          "count": 1,
+          "id": "minecraft:saddle"
+        },
+        "body": {
+          "count": 1,
+          "id": "minecraft:golden_horse_armor"
+        }
+      },
+      "vehicle": null
+    },
+    {
+      "type": "panda",
+      "position": [
+        39.90625002980232,
+        65.0,
+        219.67291669547558
+      ],
+      "rotation": [
+        25.458778381347656,
+        0.0
+      ],
+      "uuid": [
+        -1724971904,
+        1524580521,
+        -1969419941,
+        -1797720379
+      ],
+      "name": null,
+      "age": 0,
+      "variant": 0,
+      "mainGene": "normal",
+      "hiddenGene": "weak",
+      "sitting": false,
+      "tame": false,
+      "equipment": {},
+      "vehicle": null
+    },
+    {
+      "type": "panda",
+      "position": [
+        36.8395833671093,
+        65.0,
+        214.24926661864106
+      ],
+      "rotation": [
+        6.83892822265625,
+        0.0
+      ],
+      "uuid": [
+        1025831898,
+        -223523102,
+        -1518198294,
+        665303135
+      ],
+      "name": null,
+      "age": 0,
+      "variant": 0,
+      "mainGene": "weak",
+      "hiddenGene": "weak",
+      "sitting": false,
+      "tame": false,
+      "equipment": {},
+      "vehicle": null
+    },
+    {
+      "type": "panda",
+      "position": [
+        32.873914320402484,
+        65.0,
+        221.1109007866085
+      ],
+      "rotation": [
+        228.6646728515625,
+        0.0
+      ],
+      "uuid": [
+        1675966891,
+        346312653,
+        -1374872500,
+        -727783874
+      ],
+      "name": null,
+      "age": 0,
+      "variant": 0,
+      "mainGene": "weak",
+      "hiddenGene": "weak",
+      "sitting": false,
+      "tame": false,
+      "equipment": {},
+      "vehicle": null
+    },
+    {
+      "type": "panda",
+      "position": [
+        39.95720949077752,
+        65.0,
+        208.07804316950012
+      ],
+      "rotation": [
+        263.986572265625,
+        0.0
+      ],
+      "uuid": [
+        -1421443955,
+        -1468969059,
+        -2096049046,
+        -1385779067
+      ],
+      "name": null,
+      "age": 0,
+      "variant": 0,
+      "mainGene": "weak",
+      "hiddenGene": "weak",
+      "sitting": false,
+      "tame": false,
+      "equipment": {},
+      "vehicle": null
+    },
+    {
+      "type": "panda",
+      "position": [
+        41.4093291139874,
+        65.0,
+        210.16041664779186
+      ],
+      "rotation": [
+        179.5518035888672,
+        0.0
+      ],
+      "uuid": [
+        -1266113846,
+        1301891448,
+        -2084301891,
+        -1459585968
+      ],
+      "name": null,
+      "age": 0,
+      "variant": 0,
+      "mainGene": "brown",
+      "hiddenGene": "weak",
+      "sitting": false,
+      "tame": false,
+      "equipment": {},
+      "vehicle": null
+    },
+    {
+      "type": "panda",
+      "position": [
+        32.74401566148736,
+        65.0,
+        211.34021242855533
+      ],
+      "rotation": [
+        297.6404113769531,
+        0.0
+      ],
+      "uuid": [
+        936183544,
+        -1577367697,
+        -1557729081,
+        -851873540
+      ],
+      "name": null,
+      "age": 0,
+      "variant": 0,
+      "mainGene": "weak",
+      "hiddenGene": "weak",
+      "sitting": false,
+      "tame": false,
+      "equipment": {},
+      "vehicle": null
+    },
+    {
+      "type": "horse",
+      "position": [
+        21.59129839540062,
+        64.0,
+        224.93677694601615
+      ],
+      "rotation": [
+        33.395652770996094,
+        0.0
+      ],
+      "uuid": [
+        -1042997784,
+        1444169625,
+        -1391745318,
+        -2076394481
+      ],
+      "name": null,
+      "age": 0,
+      "variant": 771,
+      "mainGene": "normal",
+      "hiddenGene": "normal",
+      "sitting": false,
+      "tame": true,
+      "equipment": {
+        "saddle": {
+          "count": 1,
+          "id": "minecraft:saddle"
+        }
+      },
+      "vehicle": null
+    },
+    {
+      "type": "panda",
+      "position": [
+        39.983312198248576,
+        65.0,
+        232.0095547375856
+      ],
+      "rotation": [
+        55.08197021484375,
+        0.0
+      ],
+      "uuid": [
+        -205662258,
+        1253789680,
+        -1366155594,
+        1136196683
+      ],
+      "name": null,
+      "age": 0,
+      "variant": 0,
+      "mainGene": "weak",
+      "hiddenGene": "brown",
+      "sitting": false,
+      "tame": false,
+      "equipment": {},
+      "vehicle": null
+    },
+    {
+      "type": "panda",
+      "position": [
+        37.96631829456128,
+        65.0,
+        226.04159794831287
+      ],
+      "rotation": [
+        218.99649047851562,
+        0.0
+      ],
+      "uuid": [
+        -754261032,
+        -1553511023,
+        -1952645871,
+        -2060267094
+      ],
+      "name": null,
+      "age": 0,
+      "variant": 0,
+      "mainGene": "weak",
+      "hiddenGene": "weak",
+      "sitting": false,
+      "tame": false,
+      "equipment": {},
+      "vehicle": null
+    },
+    {
+      "type": "panda",
+      "position": [
+        41.183584991165226,
+        65.0,
+        225.0366070825071
+      ],
+      "rotation": [
+        267.5018310546875,
+        0.0
+      ],
+      "uuid": [
+        -565065533,
+        -1279770091,
+        -1124358925,
+        785628147
+      ],
+      "name": null,
+      "age": 0,
+      "variant": 0,
+      "mainGene": "weak",
+      "hiddenGene": "brown",
+      "sitting": false,
+      "tame": false,
+      "equipment": {},
+      "vehicle": null
+    }
+  ]
+}
